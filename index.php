@@ -30,7 +30,7 @@ include('conexao.php');
                 <button style="margin:20px;" type="button" class="btn btn-lg btn-info" data-toggle="modal" data-target="#avalista">
                 Contrato - Cliente com Avalista
                 </button>
-				<button style="margin:20px;" type="button" class="btn btn-lg btn-info" onclick="location.href='calculo.php';" target="_blank">
+				<button style="margin:20px;" type="button" class="btn btn-lg btn-info" onclick="location.href='contrato.php';" target="_blank">
 				<!--input type="button" onclick="location.href='http://google.com';" value="Go to Google" /-->
                 Cálculo de Juros de Parcelas
                 </button>
