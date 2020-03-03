@@ -1,4 +1,6 @@
-<?php //require_once("banco-contrato.php");?>
+<?php //require_once("banco-contrato.php");
+$dp = date("Ymd");
+?>
 <!doctype html>
 <html>
 <head>
@@ -13,8 +15,10 @@
 
 </head>
 
+	
 	<form action="lista-contrato.php" method="post">
 		<p>Código do Cliente: <input class="form-control" type="text" name="cliente"/></p>
+		<input type="hidden" name="dp" value="<?=$dp?>" />
 		<td><button class="btn btn-primary" type="submit">Buscar</button></td>
 	</form>
 	
