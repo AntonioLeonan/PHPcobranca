@@ -38,7 +38,9 @@
                         		<?php                        
                                     foreach ($contratos as $contrato ) :
                                         $multiplicador = round(calculaJuros($contrato['Atrs'], $tx), 4);
-                                        $valorAtual = $multiplicador *  floatval ($contrato['valorParcela']);
+                                        $valorAtual = $multiplicador * str_replace(",","",($contrato['valorParcela']))/100; 
+                                         // para que a multiplicação de certo tem que remover a virgula utilizando o str_replace e resultado dividir por 100. 
+
                                 ?>
                                 <tr>
                                     <td><?= $contrato['contrato'] ?></td>
