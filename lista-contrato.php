@@ -11,7 +11,7 @@
             <form name="form" action="lista-contrato.php" method="post">
                 <p>Código do Cliente: <input type="text" name="cliente" id="cliente"></p>
                 <p>Data Pagamento:<input type="date" name="dp" id="dp"></p>
-                <p>Taxa :<input type="text" name="tx" id="tx"></p>
+                <p>Taxa :<input type="number" step="0.01" min="0" max="10" name="tx" id="tx"></p>
                 <td><button class="btn btn-primary" type="submit" name="formulario">Calcular</button></td>
             </form>
     </div>
@@ -21,6 +21,7 @@
         if  ( isset($_POST["formulario"])) {    
             $cliente = isset($_POST['cliente']) ? $_POST['cliente'] : "";
             $dp = isset($_POST['dp']) ? $_POST['dp'] : date("Ymd");
+            $tx = isset($_POST['tx']) ? $_POST['tx'] : "Você esqueceu a taxa";
             $contratos = buscaContrato($conexao, $cliente, $dp); ?>                
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -31,9 +32,13 @@
                                     <th scope="col">Valor da Parcela</th>
                                     <th scope="col">Vencimento</th>
                                     <th scope="col">Dias Atrasados</th>
+                                    <th scope="col">Multiplicador</th>
+                                    <th scope="col">Valor atual</th>
                                 </tr>
                         		<?php                        
                                     foreach ($contratos as $contrato ) :
+                                        $multiplicador = round(calculaJuros($contrato['Atrs'], $tx), 4);
+                                        $valorAtual = $multiplicador *  floatval ($contrato['valorParcela']);
                                 ?>
                                 <tr>
                                     <td><?= $contrato['contrato'] ?></td>
@@ -41,6 +46,8 @@
                                     <td><?= $contrato['valorParcela'] ?></td>
                                     <td><?= $contrato['vencto'] ?></td>
                                     <td><?= $contrato['Atrs'] ?></td>
+                                    <td><?= $multiplicador ?></td>
+                                    <td><?= $valorAtual ?></td>
                                 </tr>
                                 <?php 
                                     endforeach
